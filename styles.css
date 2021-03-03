@@ -1,0 +1,175 @@
+h1,h2,h3 {
+	color: #09437D;
+}
+
+h1{
+	font-size: 40px;
+	font-weight: lighter;
+	margin: 0;
+}
+
+h2 {
+	font-size: 45px;
+	font-weight: bold;
+	margin:0;
+}
+
+.favourite-left h2 {
+	font-size: 40px;
+	font-weight: lighter;
+	margin:0;
+}
+
+h3{
+	font-size: 30px;
+	font-weight: bold;
+}
+
+div, nav {
+	/*border: 1px dotted grey;*/
+	margin: 10px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+	margin-bottom: 10px;
+}
+
+.button {
+	align-items: center;
+
+}
+
+.but {
+	font-size: 15px;
+	height: 40px;
+	text-align: center;
+}
+
+.img1 {
+	height:80px;
+	width:80px;
+}
+
+.img2 {
+	height: 40px;
+	width:40px;
+}
+
+.head-left {
+	grid-area: head-left;
+}
+
+.head-right {
+	grid-area: head-right;
+	text-align: center;
+	align-self: center;
+}
+
+.head {
+	display: grid;
+	max-width: 900px; 
+	margin-left: auto;
+	margin-right: auto;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-areas: 
+		"head-left head-right";
+}
+
+.main-left {
+	grid-area: main-left;
+}
+
+.main-right {
+	grid-area: main-right;
+	text-align: right;
+}
+
+.city {
+	grid-area: city;
+}
+
+.weat-icon {
+	grid-area: weat-icon;
+
+}
+
+.degrees {
+	grid-area: degrees;
+}
+
+.main {
+	display: grid;
+	max-width: 900px; 
+	margin-left: auto;
+	margin-right: auto;
+	grid-template-columns: 1fr 1fr 2fr;
+	grid-template-rows:2;
+	grid-template-areas: 
+		"city city main-right"
+		"weat-icon degrees main-right"
+}
+
+.main-left{
+	display: grid;
+	max-width: 900px; 
+	margin-left: auto;
+	margin-right: auto;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 2;
+	grid-template-areas: 
+		"city city"
+		"weat-icon degrees";
+}
+
+.favourite-left {
+	grid-area: favourite-left;
+}
+
+.favourite-right {
+	grid-area: favourite-right;
+	text-align: right;
+	align-self: center;
+}
+
+.favourite {
+	display: grid;
+	max-width: 900px; 
+	margin-left: auto;
+	margin-right: auto;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas: 
+		"favourite-left favourite-right"
+}
+
+.favourite-head {
+	display: flex;
+    justify-content: space-between;
+	align-items: center;
+	margin: 0;
+}
+
+.favourite-list-left {
+	grid-area: favourite-list-left;
+}
+
+.favourite-list-right {
+	grid-area: favourite-list-right;
+}
+
+.favourite-list {
+	display: grid;
+	max-width: 900px; 
+	margin-left: auto;
+	margin-right: auto;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas: 
+		"favourite-list-left favourite-list-right"
+}
+
+.favourite-head{
+	align-items: inline;
+}
