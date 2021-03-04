@@ -3,55 +3,58 @@ h1,h2,h3 {
 }
 
 h1{
-	font-size: 40px;
+	font-size: 2.5vw;
 	font-weight: lighter;
 	margin: 0;
 }
 
 h2 {
-	font-size: 45px;
+	font-size: 3vw;
 	font-weight: bold;
-	margin:0;
+	margin: 0;
 }
 
 .favourite-left h2 {
-	font-size: 40px;
+	font-size: 2.2vw;
 	font-weight: lighter;
-	margin:0;
 }
 
 h3{
-	font-size: 30px;
+	font-size: 2vw;
 	font-weight: bold;
+	margin: 0;
 }
 
 p {
-	font-size: 30px;
-	margin:0;
 	color: #51769B;
+	font-size: 2vw;
+	margin: 0;
+}
+
+.degrees p{
+	font-size: 5vw;
+}
+
+p.head-text{
+	font-size: 1vw;
 }
 
 span {
 	color: white;
-}
-
-.degrees p{
-	font-size: 70px;
-}
-
-p.head-text{
-	font-size:15px;
+	text-align: right;
 }
 
 div, nav {
 	margin: 10px;
-	/*border: 1px dotted grey;*/
+	margin-left: 25px;
+	margin-right: 25px;
 }
 
 ul {
     list-style-type: none;
 	padding-left: 0;
     margin-bottom: 20px;
+	margin-top: 0;
 }
 
 li {
@@ -61,9 +64,10 @@ li {
 ul.items li {
 	background: #09437D;
 	opacity: 0.6;
+	display: flex;
     justify-content: space-between;
-    padding: 7px;
-    margin-bottom: 9px;
+    padding: 8px;
+    margin-bottom: 10px;
 }
 
 .button {
@@ -73,22 +77,31 @@ ul.items li {
 .but1 {
 	background-color: #ABC5DF;
 	text-align: center;
-	border-radius: 7px;
+	border-radius: 6px;
     border: none;
-    height: 40px;
+    height: 50px;
     padding: 10px 50px;
 }
 
 .but2 {
 	color: #fff;
+	background-color: #09437D;
     font-size: 30px;
-    background-color: #09437D;
     width: 40px;
     height: 40px;
     border-radius: 50px;
     border: none;
-    padding: 0;
     text-align: center;
+	padding: 0;
+}
+
+input.choice {
+	background: #C2D7EC;
+	font-size: 0.9vw;
+	width: 250px;
+	border: none;
+    margin-right: 15px;
+	padding: 16px;
 }
 
 .img1 {
@@ -101,12 +114,8 @@ ul.items li {
 	width:40px;
 }
 
-input.choice {
-	padding: 13px;
-    margin-right: 15px;
-    border: none;
-    background: #C2D7EC;
-    width: 250px;
+img.mobile{
+    display: none;
 }
 
 .head-left {
@@ -121,7 +130,7 @@ input.choice {
 
 .head {
 	display: grid;
-	max-width: 900px; 
+	max-width: 1100px; 
 	margin-left: auto;
 	margin-right: auto;
 	grid-template-columns: 1fr 1fr 1fr;
@@ -129,12 +138,8 @@ input.choice {
 		"head-left head-right";
 }
 
-.main-left {
-	grid-area: main-left;
-}
-
-.main-right {
-	grid-area: main-right;
+.primary-right {
+	grid-area: primary-right;
 	text-align: right;
 }
 
@@ -151,44 +156,35 @@ input.choice {
 	grid-area: degrees;
 }
 
-.main {
+.primary {
 	display: grid;
-	max-width: 900px; 
+	max-width: 1100px; 
 	margin-left: auto;
 	margin-right: auto;
 	grid-template-columns: 1fr 1fr 2fr;
-	grid-template-rows:2;
 	grid-template-areas: 
-		"city city main-right"
-		"weat-icon degrees main-right"
-}
-
-.main-left{
-	display: grid;
-	max-width: 900px; 
-	margin-left: auto;
-	margin-right: auto;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 2;
-	grid-template-areas: 
-		"city city"
-		"weat-icon degrees";
+		"city city primary-right"
+		"weat-icon degrees primary-right"
 }
 
 .favourite-left {
 	grid-area: favourite-left;
+	align-self:center;
 }
 
 .favourite-right {
 	grid-area: favourite-right;
 	text-align: right;
-	align-self: center;*/
-	/*justify-content: space-between;*/
+	align-self: center;
+	align-items:center;
+	display: flex;
+	justify-content: flex-end;
+	margin-right:28px;
 }
 
 .favourite {
 	display: grid;
-	max-width: 900px; 
+	max-width: 1100px; 
 	margin-left: auto;
 	margin-right: auto;
 	grid-template-columns: 1fr 1fr;
@@ -202,6 +198,7 @@ input.choice {
 	align-items: center;
 	margin: 0;
 	text-align: center;
+	margin-bottom:5px;
 }
 
 .favourite-list-left {
@@ -214,7 +211,7 @@ input.choice {
 
 .favourite-list {
 	display: grid;
-	max-width: 900px; 
+	max-width: 1100px; 
 	margin-left: auto;
 	margin-right: auto;
 	grid-template-columns: 1fr 1fr;
@@ -222,6 +219,80 @@ input.choice {
 		"favourite-list-left favourite-list-right"
 }
 
-.favourite-head{
-	align-items: inline;
+.favourite-list-item {
+	padding:0;
+	margin:0;
+}
+
+@media only screen and (max-width: 800px) {
+.primary, .favourite-list, .favorite{
+    display: block;
+}
+
+.head{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.primary h2 {
+    font-size: 5vw;
+}
+
+.primary p{
+    font-size: 5vw;
+}
+
+.img1{
+    width: auto;
+    height: 80px;
+    margin-right: 20px;
+}
+
+.img2{
+    width: auto;
+    height: 50px;
+}
+
+p.head-text{
+    display: none;
+}
+
+.but1{
+    padding: 0;
+}
+
+.but1 img{
+    display: block;
+    height: 50px;
+    width: 50px;
+}
+
+h1{
+	font-size: 4vw;
+}
+
+h2 {
+	font-size: 3vw;
+}
+
+.favourite-left h2 {
+	font-size: 4vw;
+}
+
+h3{
+	font-size: 3.5vw;
+}
+
+p {
+	font-size: 4vw;
+}
+
+.degrees p{
+	font-size: 5vw;
+}
+
+input.choice {
+	font-size: 1.8vw;
+}
+
 }
