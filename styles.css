@@ -3,40 +3,41 @@ h1,h2,h3 {
 }
 
 h1{
-	font-size: 2.5vw;
+	font-size: 37px;
 	font-weight: lighter;
 	margin: 0;
 }
 
 h2 {
-	font-size: 3vw;
+	font-size: 45px;
 	font-weight: bold;
 	margin: 0;
 }
 
 .favourite-left h2 {
-	font-size: 2.2vw;
+	font-size: 34px;
 	font-weight: lighter;
 }
 
 h3{
-	font-size: 2vw;
+	font-size: 25px;
 	font-weight: bold;
 	margin: 0;
 }
 
 p {
 	color: #51769B;
-	font-size: 2vw;
+	font-size: 24px;
 	margin: 0;
 }
 
-.degrees p{
-	font-size: 5vw;
+.weat-icon p{
+	font-size: 65px;
+	padding-left: 80px;
 }
 
 p.head-text{
-	font-size: 1vw;
+	font-size: 14px;
 }
 
 span {
@@ -44,7 +45,7 @@ span {
 	text-align: right;
 }
 
-div, nav {
+div, nav, form {
 	margin: 10px;
 	margin-left: 25px;
 	margin-right: 25px;
@@ -80,7 +81,7 @@ ul.items li {
 	border-radius: 6px;
     border: none;
     height: 50px;
-    padding: 10px 50px;
+    padding: 10px 31px;
 }
 
 .but2 {
@@ -97,21 +98,24 @@ ul.items li {
 
 input.choice {
 	background: #C2D7EC;
-	font-size: 0.9vw;
+	font-size: 14px;
 	width: 250px;
 	border: none;
     margin-right: 15px;
 	padding: 16px;
+	flex: 1;
+	text-overflow: ellipsis;
+    overflow-y: hidden;
 }
 
 .img1 {
-	height:80px;
-	width:80px;
+	height: 80px;
+	width: 80px;
 }
 
 .img2 {
-	height: 40px;
-	width:40px;
+	height: 50px;
+	width: 50px;
 }
 
 img.mobile{
@@ -149,11 +153,9 @@ img.mobile{
 
 .weat-icon {
 	grid-area: weat-icon;
-
-}
-
-.degrees {
-	grid-area: degrees;
+	display: flex;
+	flex-direction: row;
+	align-items:center;	
 }
 
 .primary {
@@ -161,10 +163,10 @@ img.mobile{
 	max-width: 1100px; 
 	margin-left: auto;
 	margin-right: auto;
-	grid-template-columns: 1fr 1fr 2fr;
+	grid-template-columns: 1fr 1fr;
 	grid-template-areas: 
-		"city city primary-right"
-		"weat-icon degrees primary-right"
+		"city primary-right"
+		"weat-icon primary-right"
 }
 
 .favourite-left {
@@ -178,8 +180,6 @@ img.mobile{
 	align-self: center;
 	align-items:center;
 	display: flex;
-	justify-content: flex-end;
-	margin-right:28px;
 }
 
 .favourite {
@@ -224,8 +224,43 @@ img.mobile{
 	margin:0;
 }
 
+
 @media only screen and (max-width: 800px) {
-.primary, .favourite-list, .favorite{
+
+html {
+	overflow-x: hidden;
+}
+
+h1{
+	font-size: 23px;
+}
+
+h3{
+	font-size: 24px;
+}
+
+p {
+	font-size: 22px;
+}
+
+.primary h2 {
+    font-size: 30px;
+}
+
+.favourite-left h2 {
+	font-size: 28px;
+}
+
+.weat-icon p{
+	font-size: 31px;
+}
+
+
+p.head-text{
+    display: none;
+}
+
+.primary, .favourite-list, .favourite {
     display: block;
 }
 
@@ -234,65 +269,32 @@ img.mobile{
     justify-content: flex-start;
 }
 
-.primary h2 {
-    font-size: 5vw;
+.favourite-right {
+	align-items: left;
 }
 
-.primary p{
-    font-size: 5vw;
+input.choice {
+	font-size: 13px;
 }
 
-.img1{
+.img1 {
     width: auto;
     height: 80px;
     margin-right: 20px;
 }
 
-.img2{
+.img2 {
     width: auto;
     height: 50px;
 }
 
-p.head-text{
-    display: none;
-}
-
-.but1{
+.but1 {
     padding: 0;
 }
 
-.but1 img{
+.but1 img {
     display: block;
     height: 50px;
     width: 50px;
 }
-
-h1{
-	font-size: 4vw;
-}
-
-h2 {
-	font-size: 3vw;
-}
-
-.favourite-left h2 {
-	font-size: 4vw;
-}
-
-h3{
-	font-size: 3.5vw;
-}
-
-p {
-	font-size: 4vw;
-}
-
-.degrees p{
-	font-size: 5vw;
-}
-
-input.choice {
-	font-size: 1.8vw;
-}
-
 }
