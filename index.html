@@ -10,7 +10,7 @@
 			<div class="head">
 				<div class="head-left"><h1>Погода здесь</h1></div>
 				<div class="head-right">
-					<button class="but1">
+					<button class="but1" id='reload-gelocation'>
 						<p class="head-text">Обновить геолокацию</p>
 						<img class="mobile" src="https://i.dlpng.com/static/png/6913756_preview.png">
 					</button>
@@ -18,240 +18,26 @@
 			</div>
 		</header>
 		<main>
-			<div class="primary">
-				<div class="city"><h2>Saint-Petersburg</h2></div>
-				<div class="weat-icon"><img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather04-512.png" alt="Иконка погоды" class="img1"><p>8 °С</p></div>
-				<div class="primary-right">
-					<ul class="items">
-						<li>
-							<span>Ветер</span>
-							<span>Moderate breeze, 6.0 m/s, North-northwest</span>
-						</li>
-						<li>
-							<span>Облачность</span>
-							<span>Broken clouds</span>
-						</li>
-						<li>
-							<span>Давление</span>
-							<span>1013 hpa</span>
-						</li>
-						<li>
-							<span>Влажность</span>
-							<span>52%</span>
-						</li>
-							<li>
-								<span>Координаты</span>
-								<span>[59.88, 30.42]</span>
-							</li>
-						</ul>
-				</div>
+			<div class="primary loader" id='primary'>
+				 <div class="loader"><h2>Подождите, данные загружаются</h2></div>
+				 <img class="loader" src="https://i.dlpng.com/static/png/6913756_preview.png">
 			</div>
 			<div class="favourite">
 				<div class="favourite-left"><h2>Избранное</h2></div>
-				<form class="favourite-right"><input type="text" placeholder="Добавить новый город" class="choice"><button class="add but2">+</button></form>
+				<form class="favourite-right" id='form-add-city'><input id='form-add-city-input' type="text" placeholder="Добавить новый город" class="choice"><button class="add but2">+</button></form>
 			</div>
-			<div class="favourite-list">
-				<div class="favourite-list-left">
-					<ul>
-						<li>
-							<div class="favourite-list-item">
-								<div class="favourite-head">
-									<h3>Moscow</h3>
-									<p>5 °C</p>
-									<img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather04-512.png" alt="Иконка погоды" class="img2">
-									<button class="delete but2">×</button>
-								</div>
-								<ul class="items">
-									<li>
-										<span>Ветер</span>
-										<span>Moderate breeze, 6.0 m/s, North-northwest</span>
-									</li>
-									<li>
-										<span>Облачность</span>
-										<span>Broken clouds</span>
-									</li>
-									<li>
-										<span>Давление</span>
-										<span>1013 hpa</span>
-									</li>
-									<li>
-										<span>Влажность</span>
-										<span>52%</span>
-									</li>
-									<li>
-										<span>Координаты</span>
-										<span>[59.88, 30.42]</span>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li>
-							<div class="favourite-list-item">
-								<div class="favourite-head">
-									<h3>Moscow</h3>
-									<p>5 °C</p>
-									<img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather04-512.png" alt="Иконка погоды" class="img2">
-									<button class="delete but2">×</button>
-								</div>
-								<ul class="items">
-									<li>
-										<span>Ветер</span>
-										<span>Moderate breeze, 6.0 m/s, North-northwest</span>
-									</li>
-									<li>
-										<span>Облачность</span>
-										<span>Broken clouds</span>
-									</li>
-									<li>
-										<span>Давление</span>
-										<span>1013 hpa</span>
-									</li>
-									<li>
-										<span>Влажность</span>
-										<span>52%</span>
-									</li>
-									<li>
-										<span>Координаты</span>
-										<span>[59.88, 30.42]</span>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li>
-							<div class="favourite-list-item">
-								<div class="favourite-head">
-									<h3>Moscow</h3>
-									<p>5 °C</p>
-									<img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather04-512.png" alt="Иконка погоды" class="img2">
-									<button class="delete but2">×</button>
-								</div>
-								<ul class="items">
-									<li>
-										<span>Ветер</span>
-										<span>Moderate breeze, 6.0 m/s, North-northwest</span>
-									</li>
-									<li>
-										<span>Облачность</span>
-										<span>Broken clouds</span>
-									</li>
-									<li>
-										<span>Давление</span>
-										<span>1013 hpa</span>
-									</li>
-									<li>
-										<span>Влажность</span>
-										<span>52%</span>
-									</li>
-									<li>
-										<span>Координаты</span>
-										<span>[59.88, 30.42]</span>
-									</li>
-								</ul>
-							</div>
-						</li>
+			<div class="favourite-list" id='favourite-list'>
+				<div class="favourite-list-left" >
+					<ul id='fav-cities-left'>
 					</ul>
 				</div>
 				<div class="favourite-list-right">
-					<ul>
-						<li>
-							<div class="favourite-list-item">
-							<div class="favourite-head">
-									<h3>Helsinki</h3>
-									<p>5 °C</p>
-									<img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather04-512.png" alt="Иконка погоды" class="img2">
-									<button class="delete but2">×</button>
-								</div>
-								<ul class="items">
-									<li>
-										<span>Ветер</span>
-										<span>Moderate breeze, 6.0 m/s, North-northwest</span>
-									</li>
-									<li>
-										<span>Облачность</span>
-										<span>Broken clouds</span>
-									</li>
-									<li>
-										<span>Давление</span>
-										<span>1013 hpa</span>
-									</li>
-									<li>
-										<span>Влажность</span>
-										<span>52%</span>
-									</li>
-									<li>
-										<span>Координаты</span>
-										<span>[59.88, 30.42]</span>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li>
-							<div class="favourite-list-item">
-							<div class="favourite-head">
-									<h3>Helsinki</h3>
-									<p>5 °C</p>
-									<img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather04-512.png" alt="Иконка погоды" class="img2">
-									<button class="delete but2">×</button>
-								</div>
-								<ul class="items">
-									<li>
-										<span>Ветер</span>
-										<span>Moderate breeze, 6.0 m/s, North-northwest</span>
-									</li>
-									<li>
-										<span>Облачность</span>
-										<span>Broken clouds</span>
-									</li>
-									<li>
-										<span>Давление</span>
-										<span>1013 hpa</span>
-									</li>
-									<li>
-										<span>Влажность</span>
-										<span>52%</span>
-									</li>
-									<li>
-										<span>Координаты</span>
-										<span>[59.88, 30.42]</span>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li>
-							<div class="favourite-list-item">
-							<div class="favourite-head">
-									<h3>Helsinki</h3>
-									<p>5 °C</p>
-									<img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather04-512.png" alt="Иконка погоды" class="img2">
-									<button class="delete but2">×</button>
-								</div>
-								<ul class="items">
-									<li>
-										<span>Ветер</span>
-										<span>Moderate breeze, 6.0 m/s, North-northwest</span>
-									</li>
-									<li>
-										<span>Облачность</span>
-										<span>Broken clouds</span>
-									</li>
-									<li>
-										<span>Давление</span>
-										<span>1013 hpa</span>
-									</li>
-									<li>
-										<span>Влажность</span>
-										<span>52%</span>
-									</li>
-									<li>
-										<span>Координаты</span>
-										<span>[59.88, 30.42]</span>
-									</li>
-								</ul>
-							</div>
-						</li>
+					<ul id='fav-cities-right'>
+						
 					</ul>
 				</div>
 			</div>
 		</main>
+		<script src="index.js" type="application/javascript"></script>
 	</body>
 </html>

@@ -19,10 +19,32 @@ h2 {
 	font-weight: lighter;
 }
 
+.loader h2 {
+	font-size: 50px;
+	font-weight: lighter;
+	margin: 0;
+}
+
+img.loader {
+	width: auto;
+    height: 150px;
+}
+
 h3{
 	font-size: 25px;
 	font-weight: bold;
 	margin: 0;
+}
+
+.mini-loader h3 {
+	font-size: 30px;
+	font-weight: lighter;
+	margin: 0;
+}
+
+img.mini-loader {
+	width: auto;
+    height: 70px;
 }
 
 p {
@@ -167,6 +189,18 @@ img.mobile{
 	grid-template-areas: 
 		"city primary-right"
 		"weat-icon primary-right"
+}
+
+.loader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.mini-loader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .favourite-left {
