@@ -23,6 +23,10 @@ function loadWeather(city = undefined, coord = undefined, callback) {
             .then(data => {
                 callback(data)
             })
+			.catch(err => {
+				alert('Ошибка API')
+				callback(null)
+			})
     } else {
         fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coord.lat}&lon=${coord.lon}&appid=${API_KEY}&units=metric`)
             .then(res => {
@@ -31,30 +35,23 @@ function loadWeather(city = undefined, coord = undefined, callback) {
             .then(data => {
                 callback(data)
             })
+			.catch(err => {
+				alert('Ошибка API')
+				callback(null)
+			})
     }
 }
 
 function loaderCity(city) {
     let loader = document.createElement('li')
     loader.id = `loading-city-${city}`
-	loader.class = "mini-loader"
+	loader.setAttribute("class", "mini-loader")
     loader.innerHTML = `
 			<h3>Подождите, данные загружаются</h3>
-			<img class="mini-loader" src="https://i.dlpng.com/static/png/6913756_preview.png">
+			<img src="https://i.dlpng.com/static/png/6913756_preview.png">
     `
     return loader
 }
-
-/*function loaderPrimaryCity(city) {
-    let loader = document.createElement('li')
-    loader.id = `loading-city-${city}`
-    loader.innerHTML = `
-        <div class="loader"><h2>Подождите, данные загружаются</h2></div>
-		<img class="loader" src="https://i.dlpng.com/static/png/6913756_preview.png">
-    `
-    return loader
-}*/
-
 
 function cityCard(data) {
     let city = document.createElement('li')
@@ -69,19 +66,19 @@ function cityCard(data) {
             <ul class="items">
                 <li>
                     <span>Ветер</span>
-                    <span>Moderate breeze, 6.0 m/s, North-northwest</span>
+                    <span>${data.wind.speed} m/s, ${data.wind.deg}</span>
                 </li>
                 <li>
                     <span>Облачность</span>
-                    <span>Broken clouds</span>
+                    <span>${data.clouds.all} %</span>
                 </li>
                 <li>
                     <span>Давление</span>
-                    <span> hpa</span>
+                    <span> ${data.main.pressure} hpa</span>
                 </li>
                 <li>
                     <span>Влажность</span>
-                    <span>52%</span>
+                    <span>${data.main.humidity} %</span>
                 </li>
                 <li>
                     <span>Координаты</span>
@@ -101,8 +98,7 @@ function renderCity(city = undefined) {
     loadWeather(city, undefined, function(data) {
         console.log('data', data)
         document.getElementById(`loading-city-${city}`).remove()
-        favs.append(cityCard(data))
-		cities.push(data.name.toLowerCase())
+        if (data) favs.append(cityCard(data))
     })
 }
 
@@ -111,6 +107,8 @@ function deleteCity(item, name){
 	item.parentElement.parentElement.parentElement.remove()
 	let index = cities.indexOf(name.toLowerCase)
 	cities.splice(index, 1)
+	saveToLocalStorage()
+	console.log(cities)
 }
 
 function loadCurrentWeather(callback) {
@@ -138,6 +136,10 @@ function changeCurrentWeaher() {
     loadCurrentWeather(function(data) {
 		let primary = document.getElementById('primary')
 		primary.classList.remove('loader')
+		if (!data) {
+			primary.innerHTML = ""
+			return 
+		}
         primary.innerHTML = `
         <div class="city">
             <h2>${data.name}</h2>
@@ -150,11 +152,11 @@ function changeCurrentWeaher() {
             <ul class="items">
                 <li>
                     <span>Ветер</span>
-                    <span>Moderate breeze, 6.0 m/s, North-northwest</span>
+                    <span>${data.wind.speed} m/s, ${data.wind.deg}</span>
                 </li>
                 <li>
                     <span>Облачность</span>
-                    <span>Broken clouds</span>
+                    <span>${data.clouds.all} %</span>
                 </li>
                 <li>
                     <span>Давление</span>
@@ -162,11 +164,11 @@ function changeCurrentWeaher() {
                 </li>
                 <li>
                     <span>Влажность</span>
-                    <span>52%</span>
+                    <span>${data.main.humidity} %</span>
                 </li>
                 <li>
                     <span>Координаты</span>
-                    <span>[59.88, 30.42]</span>
+                    <span>[${data.coord.lat}, ${data.coord.lon}]</span>
                 </li>
             </ul>
         </div>
@@ -188,28 +190,17 @@ document.getElementById('form-add-city').onsubmit = function(e) {
     document.getElementById('form-add-city-input').value = ''
 
     renderCity(name)
-
-    saveToLocalStorage()
+	
+	cities.push(name)
+	
+	saveToLocalStorage()
 
     return false
 }
 
-window.onload = () => {
+
     changeCurrentWeaher()
     document.getElementById('reload-gelocation').addEventListener('click', changeCurrentWeaher)
-
-    
-    
-    /*document.getElementById('favourite-list').addEventListener('DOMSubtreeModified', function() {
-        let buttons = document.getElementsByClassName('delete but2')
-        for (let i = 0; i < buttons.length; i++) {
-            let btn = buttons[i]
-            console.log(btn)
-            btn.addEventListener('click', function() {
-                btn.parentElement.parentElement.parentElement.remove()
-            })
-        }
-    })*/
 
     loadFromLocalStorage()
 
@@ -218,4 +209,3 @@ window.onload = () => {
         console.log(city)
         renderCity(city)
     }
-}

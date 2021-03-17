@@ -36,16 +36,7 @@ h3{
 	margin: 0;
 }
 
-.mini-loader h3 {
-	font-size: 30px;
-	font-weight: lighter;
-	margin: 0;
-}
 
-img.mini-loader {
-	width: auto;
-    height: 70px;
-}
 
 p {
 	color: #51769B;
@@ -201,6 +192,17 @@ img.mobile{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+.mini-loader h3 {
+	font-size: 25px;
+	font-weight: lighter;
+	margin: 0;
+}
+
+.mini-loader img {
+	width: auto;
+    height: 50px;
 }
 
 .favourite-left {
