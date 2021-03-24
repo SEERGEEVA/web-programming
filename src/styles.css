@@ -201,8 +201,7 @@ img.mobile{
 }
 
 .mini-loader img {
-	width: auto;
-    height: 50px;
+	width: 100px;
 }
 
 .favourite-left {

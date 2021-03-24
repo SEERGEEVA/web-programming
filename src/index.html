@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang='ru'>
+	<head>
+		<meta charset=UTF-8'>
+		<title>Weather</title>
+		<link rel='stylesheet' href='/src/styles.css'>
+	</head> 
+	<body>
+		<header>
+			<div class='head'>
+				<div class='head-left'><h1>Погода здесь</h1></div>
+				<div class='head-right'>
+					<button class='but1' id='reload-gelocation'>
+						<p class='head-text'>Обновить геолокацию</p>
+						<img class='mobile' src='/src/load.png'>
+					</button>
+				</div>
+			</div>
+		</header>
+		<main>
+			<div class='primary' id='primary'>
+			</div>
+			<div class='favourite'>
+				<div class='favourite-left'><h2>Избранное</h2></div>
+				<form class='favourite-right' id='form-add-city'><input id='form-add-city-input' type='text' placeholder='Добавить новый город' class='choice'><button class='add but2'>+</button></form>
+			</div>
+			<div class='favourite-list' id='favourite-list'>
+				<div class='favourite-list-left' >
+					<ul id='fav-cities-left'>
+					</ul>
+				</div>
+				<div class='favourite-list-right'>
+					<ul id='fav-cities-right'>
+						
+					</ul>
+				</div>
+			</div>
+		</main>
+		<template id='tmpcityCard'>
+			<li>
+				<div class='favourite-list-item'>
+					<div class='favourite-head'>
+						<h3 id='tmp:name'></h3>
+						<p id='tmp:temp'></p>
+						<img src='https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather04-512.png' alt='Иконка погоды' class='img2'>
+						<button class='delete but2'>×</button>
+					</div>
+					<ul class='items'>
+						<li>
+							<span>Ветер</span>
+							<span id='tmp:wind'></span>
+						</li>
+						<li>
+							<span>Облачность</span>
+							<span id='tmp:clouds'></span>
+						</li>
+						<li>
+							<span>Давление</span>
+							<span id='tmp:pressure'></span>
+						</li>
+						<li>
+							<span>Влажность</span>
+							<span id='tmp:humidity'></span>
+						</li>
+						<li>
+							<span>Координаты</span>
+							<span id='tmp:coord'></span>
+						</li>
+					</ul>
+				</div>
+			</li>
+		</template>
+		<template id='tmpMiniLoader'>
+			<li class='mini-loader'>
+				<h3>Подождите, данные загружаются</h3>
+				<img src='/src/load.png'>
+			</li>
+		</template>
+		<template id='tmpPrimary'>
+			<div class='city'>
+				<h2 id='tmp:name'></h2>
+			</div>
+			<div class='weat-icon'>
+				<img src='https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather04-512.png' alt='Иконка погоды' class='img1'>
+				<p id='tmp:temp'></p>
+			</div>
+			<div class='primary-right'>
+				<ul class='items'>
+					<li>
+						<span>Ветер</span>
+						<span id='tmp:wind'></span>
+					</li>
+					<li>
+						<span>Облачность</span>
+						<span  id='tmp:clouds'></span>
+					</li>
+					<li>
+						<span>Давление</span>
+						<span id='tmp:pressure'></span>
+					</li>
+					<li>
+						<span>Влажность</span>
+						<span id='tmp:humidity'></span>
+					</li>
+					<li>
+						<span>Координаты</span>
+						<span id='tmp:coord'></span>
+					</li>
+				</ul>
+			</div>
+		</template>
+		<template id='tmpLoader'>
+			<div class='loader'>
+				<h2>Подождите, данные загружаются</h2>
+			</div>
+			<img class='loader' src='/src/load.png'>
+		</template>
+		<script src='/src/index.js' type='application/javascript'></script>
+	</body>
+</html>
