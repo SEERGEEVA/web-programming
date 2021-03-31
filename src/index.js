@@ -2,19 +2,43 @@ let cities = []
 let column = 0
 const columns_id = ['fav-cities-left', 'fav-cities-right']
 
-function saveListOfFavCities(callback) {
-    fetch(`http://localhost:5000/saveFavCities/?listCities=${JSON.stringify(cities)}`)
+function setCity(cities, callback) {
+    fetch('http://localhost:5000/favs', {
+        method: 'POST', 
+        body: JSON.stringify({data: cities}), 
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+    })
         .then(res => {
-            if(res.status === 200) {
-                callback()
-            }
+            if(res.status === 200) callback(null)
+            else callback(`Status ${res.status}`)
         })
+        .catch(err => callback(null))
 }
 
-function loadListOfFavCities(callback) {
+function delCity(city, callback) {
+    fetch('http://localhost:5000/favs', {
+        method: 'DELETE', 
+        body: JSON.stringify({city: city}), 
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+    })
+        .then(res => {
+            if(res.status === 200) callback(null)
+            else callback(`Status ${res.status}`)
+        })
+        .catch(err => callback(err))
+}
+
+function getCities(callback) {
     fetch(`http://localhost:5000/getFavCities/`)
         .then(res => res.json())
-        .then(data => callback(data))
+        .then(data => callback(null, data))
+        .catch(err => callback(err, null))
 } 
 
 function loadWeather(city = undefined, coord = undefined, id = undefined, callback) {
@@ -115,14 +139,15 @@ function renderCity(city = undefined, id = undefined, callback, flag = true) {
     })
 }
 
-function deleteCity(item, id){
-	
-	let index = cities.indexOf(id)
-    if(index !== -1) {
-        cities.splice(index, 1)
-        console.log(item, id)
-        saveListOfFavCities(() => item.parentElement.parentElement.parentElement.remove())
-    }
+function deleteCity(item, id) {
+    item.disabled = true
+	delCity(id, (err) => {
+        if(err) {
+            console.error(err)
+        } else {
+            item.parentElement.parentElement.parentElement.remove()
+        }
+    })
 }
 
 function loadCurrentWeather(callback) {
@@ -141,7 +166,7 @@ function loadCurrentWeather(callback) {
         },
         function() {
             alert('У меня нет доступа к геолокации')
-            loadWeather(defaultCity, undefined, callback)
+            loadWeather(defaultCity, undefined, undefined, callback)
         }
     )
 }
@@ -188,7 +213,14 @@ document.getElementById('form-add-city').onsubmit = function(e) {
     document.getElementById('form-add-city-input').value = ''
 
     console.log('aaaaaa')
-    renderCity(name, undefined, (id) => {cities.push(id); saveListOfFavCities()})
+
+    renderCity(name, undefined, (id) => {
+        setCity([id], (err) => {
+            if(err) {
+                console.error(err)
+            }
+        })
+    })
 
 
     return false
@@ -198,12 +230,16 @@ document.getElementById('form-add-city').onsubmit = function(e) {
 changeCurrentWeaher()
 document.getElementById('reload-gelocation').addEventListener('click', changeCurrentWeaher)
 
-loadListOfFavCities(data => {
-    cities = data
-    for(let i = 0; i < cities.length; i++) {
-        city = cities[i]
-        console.log(city)
-        renderCity(undefined, city, undefined, false)
+
+getCities((err, cities) => {
+    if(err) {
+        console.error(err)
+    } else {
+        for(let i = 0; i < cities.length; i++) {
+            city = cities[i]
+            console.log(city)
+            renderCity(undefined, city, undefined, false)
+        }
     }
 })
 

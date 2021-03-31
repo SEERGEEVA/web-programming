@@ -2,6 +2,8 @@ const redis = require('redis')
 const cors = require('cors')
 const nodeFetch = require('node-fetch')
 const express = require('express')
+const bodyParser = require('body-parser')
+
 const loadWeather = require('./loadWeather')
 
 const client = redis.createClient()
@@ -40,6 +42,87 @@ app.get('/getWeather/byCoord', (req, res) => {
             res.json(data)
         } else {
             res.status(404)
+        }
+    })
+})
+
+app.use('/favs', (req, res, next) => {
+    client.get('FAV_CITIES', (err, reply) => {
+        if(err) {
+            console.log(err)
+            res.status(500).end()
+        } else {
+            if(reply) {
+                next()
+            } else {
+                client.set('FAV_CITIES', '[]', (err, reply) => {
+                    if(err) {
+                        console.log(err)
+                        res.status(500).end()
+                        return
+                    } 
+                    next()
+                })
+            }
+        }
+    })
+})
+
+app.get('/favs', (req, res) => {
+    client.get('FAV_CITIES', (err, reply) => {
+        if (err) {
+            console.log(err)
+            res.status(500)
+            return 
+        }
+
+        res.json(JSON.parse(reply || '[]'))
+    })
+})
+
+app.use('/favs', bodyParser())
+
+app.post('/favs', (req, res) => {
+    client.get('FAV_CITIES', (err, reply) => {
+        if(err) {
+            console.log(err)
+            res.status(400).end()
+        } else {
+            let data = JSON.parse(reply || '[]')
+            data = data.concat(req.body.data)
+            client.set('FAV_CITIES', JSON.stringify(data), (err) => {
+                if(err) {
+                    console.log(err)
+                    res.status(400).end()
+                } else {
+                    res.status(200).end()
+                }
+            })
+        }
+    })
+})
+
+app.delete('/favs', (req, res) => {
+    client.get('FAV_CITIES', (err, reply) => {
+        if(err) {
+            console.log(err)
+            res.status(400).end()
+        } else {
+            let data = JSON.parse(reply || '[]')
+            console.log(data, req.body)
+            let index = data.indexOf(req.body.city)
+            if(index !== -1) {
+                data.splice(index, 1)
+            }
+            console.log(data)
+            client.set('FAV_CITIES', JSON.stringify(data), (err) => {
+                if(err) {
+                    console.log(err)
+                    res.status(400).end()
+                } else {
+                    res.status(200).end()
+                }
+            })
         }
     })
 })
