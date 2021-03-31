@@ -19,7 +19,7 @@ app.get('/getWeather/byID', (req, res) => {
         if (data) {
             res.json(data)
         } else {
-            res.status(400)
+            res.status(404)
         }
     })
 })
@@ -29,7 +29,7 @@ app.get('/getWeather/byName', (req, res) => {
         if (data) {
             res.json(data)
         } else {
-            res.status(400)
+            res.status(404)
         }
     })
 })
@@ -39,7 +39,7 @@ app.get('/getWeather/byCoord', (req, res) => {
         if (data) {
             res.json(data)
         } else {
-            res.status(400)
+            res.status(404)
         }
     })
 })
@@ -48,7 +48,7 @@ app.get('/getFavCities', (req,res) => {
     client.get('FAV_CITIES', (err, reply) => {
         if (err) {
             console.log(err)
-            res.status(400)
+            res.status(500)
             return 
         }
 
@@ -61,7 +61,7 @@ app.get('/saveFavCities', (req,res) => {
     client.set('FAV_CITIES', req.query.listCities, err => {
         if (err) {
             console.log(err)
-            res.status(400)
+            res.status(500)
         } else {
             res.status(200)
         }

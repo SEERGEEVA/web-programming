@@ -2,8 +2,13 @@ let cities = []
 let column = 0
 const columns_id = ['fav-cities-left', 'fav-cities-right']
 
-function saveListOfFavCities() {
+function saveListOfFavCities(callback) {
     fetch(`http://localhost:5000/saveFavCities/?listCities=${JSON.stringify(cities)}`)
+        .then(res => {
+            if(res.status === 200) {
+                callback()
+            }
+        })
 }
 
 function loadListOfFavCities(callback) {
@@ -111,11 +116,13 @@ function renderCity(city = undefined, id = undefined, callback, flag = true) {
 }
 
 function deleteCity(item, id){
-	item.parentElement.parentElement.parentElement.remove()
+	
 	let index = cities.indexOf(id)
-	cities.splice(index, 1)
-    console.log(item, id)
-	saveListOfFavCities()
+    if(index !== -1) {
+        cities.splice(index, 1)
+        console.log(item, id)
+        saveListOfFavCities(() => item.parentElement.parentElement.parentElement.remove())
+    }
 }
 
 function loadCurrentWeather(callback) {
@@ -200,3 +207,13 @@ loadListOfFavCities(data => {
     }
 })
 
+
+window.addEventListener('online', () => {
+    let buttons = document.querySelectorAll('button')
+    buttons.forEach(btn => btn.disabled = false)
+})
+
+window.addEventListener('offline', () => {
+    let buttons = document.querySelectorAll('button')
+    buttons.forEach(btn => btn.disabled = true)
+})
